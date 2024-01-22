@@ -3,7 +3,7 @@ package com.eshop.qa.utils
 import com.typesafe.config.ConfigFactory
 
 object Configurator {
-  val conf = ConfigFactory.load().withFallback(ConfigFactory.parseResources("application.conf"))
+  val conf = ConfigFactory.load().withFallback(ConfigFactory.parseResources("performance.conf"))
 
   val url: String = conf.getString("url")
   val rampUpDurationSeconds: Int = conf.getInt("ramp-up-duration-seconds")

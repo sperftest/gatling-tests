@@ -3,7 +3,7 @@ package com.eshop.qa.utils
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
-
+//todo
 object RequestManipulator {
   def saveStatusCodeAndResponseBody(request: HttpRequestBuilder): HttpRequestBuilder = {
     request
