@@ -13,13 +13,6 @@ object SlackNotificator {
   private val defaultMessage = """{ "message": "Test started" }"""
 
   private val grafanaLink = "127.0.0.1:8857/d/gatling/gatling-report-metrics?from=now-5m&refresh=5s"
-  private val finishMessage =
-    s"""{ "message": "Test started at %s,\n
-       |by %s,\n
-       |To watch simulation stats in runtime follow the link:\n
-       |http://127.0.0.1:8857/d/gatling/gatling-report-metrics?from=now-5m&refresh=5s\n
-       |Gatling generated result: (TODO: add this here)"
-       |}""".stripMargin
 
   def requestBody(authorName: String, startDateAndTime: LocalDateTime, endDateAndTime: LocalDateTime) ={
     val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")

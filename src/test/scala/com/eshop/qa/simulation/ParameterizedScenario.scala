@@ -2,7 +2,7 @@ package com.eshop.qa.simulation
 
 import com.eshop.qa.scenario.OrderCreationChain
 import com.eshop.qa.utils.PropertyConfigurator.getProperty
-import com.eshop.qa.utils.{Configurator, ScenarioInjector, SlackNotificator}
+import com.eshop.qa.utils.{ConfigUtil, ScenarioInjector, SlackNotificator}
 import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.core.structure.PopulationBuilder
@@ -11,14 +11,15 @@ import io.gatling.http.protocol.HttpProtocolBuilder
 
 import java.time.LocalDateTime
 
-class ParameterizedScenario extends Simulation{
+//THIS CLASS IS OUTDATED AND WILL BE REMOVED IN THE NEXT UPDATES
+class ParameterizedScenario extends Simulation with ConfigUtil{
   var startTime: LocalDateTime = LocalDateTime.now()
 
   private val httpConf: HttpProtocolBuilder = http
-    .baseUrl(Configurator.url)
-  def userCount: Int = getProperty("USERS", Configurator.usersCount.toString).toInt
-  def rampUpDuration: Int = getProperty("RAMP_DURATION", Configurator.rampUpDurationSeconds.toString).toInt
-  def testDuration: Int = getProperty("TEST_DURATION", Configurator.testDurationSeconds.toString).toInt
+    .baseUrl(baseUrl)
+  def userCount: Int = getProperty("USERS", usersCount.toString).toInt
+  def rampUpDuration: Int = getProperty("RAMP_DURATION", rampUpDurationSeconds.toString).toInt
+  def testDuration: Int = getProperty("TEST_DURATION", testDurationSeconds.toString).toInt
   before {
     startTime = LocalDateTime.now()
     println(s"Test started at: $startTime")

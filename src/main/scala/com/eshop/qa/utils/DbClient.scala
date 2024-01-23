@@ -3,8 +3,11 @@ package com.eshop.qa.utils
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
 import org.influxdb.{InfluxDB, InfluxDBFactory}
+import com.eshop.qa.utils.ConfigUtil
 
-object DbClient {
+import java.time.LocalDateTime
+
+object DbClient extends ConfigUtil {
   val url = "http://localhost:8653"
   val username = "admin"
   val password = "admin"
@@ -12,12 +15,14 @@ object DbClient {
 
   val influxDB: InfluxDB = InfluxDBFactory.connect(url, username, password)
   influxDB.setDatabase(database)
-  val simulationName: String =
-    PropertyConfigurator.getProperty("SIMULATION", "eshop.ParameterizedScenario")
-      .split('.')
+
+  val simulationName: String = simulationClass.split('.')
       .lastOption
       .getOrElse("")
       .toLowerCase()
+
+  val buildNumber: Int =
+    PropertyConfigurator.getProperty("BUILD_NUMBER", "0").toInt
 
   val metricWriter = new WriteMetricToInfluxDB(simulationName)
 
@@ -28,4 +33,9 @@ object DbClient {
       metricWriter.writeError(influxDB, requestName)
     }
   }
+
+  def buildInfoWriter(startTime: LocalDateTime): Unit = {
+    metricWriter.writeBuildInfo(influxDB, buildNumber, startTime)
+  }
+
 }

@@ -1,13 +1,13 @@
 package com.eshop.qa.models
 
 import com.eshop.qa.utils.{ConfigUtil, Randomizer}
+
 import io.gatling.core.Predef._
+import io.gatling.http.Predef._
 import io.gatling.core.structure.ChainBuilder
-import io.gatling.http.Predef.{HttpHeaderNames, HttpHeaderValues}
+import io.gatling.http.request.builder.HttpRequestBuilder
 
 import scala.collection.immutable.Iterable
-import scala.concurrent.duration._
-import scala.util.Random
 
 class AbstractPage extends ConfigUtil{
   def printErrorMessage(variable: String, message: String): ChainBuilder = {
@@ -63,4 +63,10 @@ class AbstractPage extends ConfigUtil{
         .set("address", Randomizer.getAddress())
         .set("ccNumber", Randomizer.getInt(1000000, 9999999))
   )
+
+  protected def saveStatusCodeAndResponseBody(request: HttpRequestBuilder): HttpRequestBuilder = {
+    request
+      .check(status.saveAs("statusCode"))
+      .check(bodyString.saveAs("responseBody"))
+  }
 }

@@ -4,6 +4,7 @@ import com.eshop.qa.requests._
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
 
+//THIS OBJECT IS OUTDATED AND WILL BE REMOVED IN THE NEXT UPDATES
 object OrderCreationChain {
     val execute: ChainBuilder = exec(
       GetIndexPage.getIndexPage("01_getIndexPage"),

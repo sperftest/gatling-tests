@@ -1,6 +1,6 @@
 package com.eshop.qa.models
 
-import com.eshop.qa.utils.{DbClient, JsonFormatter, Randomizer, RequestManipulator}
+import com.eshop.qa.utils.{DbClient, JsonFormatter, Randomizer}
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
@@ -61,7 +61,7 @@ object CartPage extends AbstractPage {
 
 
   private def updateQuantityHttpRqBuilder(requestName: String): HttpRequestBuilder =
-    RequestManipulator.saveStatusCodeAndResponseBody(
+    saveStatusCodeAndResponseBody(
       http(requestName)
         .post("/eshop/control/cart/updatequantity")
         .body(ElFileBody("requests/json/updateQuantity.json")).asJson

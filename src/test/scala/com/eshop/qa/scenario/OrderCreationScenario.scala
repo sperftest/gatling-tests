@@ -2,28 +2,16 @@ package com.eshop.qa.scenario
 
 import com.eshop.qa.BaseSimulation
 import com.eshop.qa.models.{CartPage, CategoriesPage, CheckoutPage, HomePage}
-import com.eshop.qa.utils.Configurator
-import com.eshop.qa.utils.PropertyConfigurator.getProperty
+import com.eshop.qa.utils.SlackNotificator
 import io.gatling.core.Predef._
-import io.gatling.http.Predef._
-import io.gatling.http.protocol.HttpProtocolBuilder
+import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
 
 import java.time.LocalDateTime
 
 case class OrderCreationScenario() extends BaseSimulation {
   var startTime: LocalDateTime = LocalDateTime.now()
 
-  private val httpConf: HttpProtocolBuilder = http
-    .baseUrl(Configurator.url)
-  def userCount: Int = getProperty("USERS", Configurator.usersCount.toString).toInt
-
-  def rampUpDuration: Int = getProperty("RAMP_DURATION", Configurator.rampUpDurationSeconds.toString).toInt
-
-  def testDuration: Int = getProperty("TEST_DURATION", Configurator.testDurationSeconds.toString).toInt
-
-
-
-  val scn = scenario(getClass.getSimpleName)
+  val scn: ScenarioBuilder = scenario(getClass.getSimpleName)
     .exec(HomePage.getIndexPage("01_getIndexPage"))
     .exec(CategoriesPage.getCategories("02_getCategories"))
     .exec(CategoriesPage.getCategoryProducts("03_getCategoryProducts"))
@@ -36,9 +24,10 @@ case class OrderCreationScenario() extends BaseSimulation {
     .exec(CartPage.removeItemFromCart("10_removeItemFromCart"))
     .exec(CheckoutPage.submitPurchase("11_submitPurchase"))
 
-  val populationBuilder = scn
-    .inject(rampUsers(userCount) during rampUpDuration)
+  val populationBuilder: PopulationBuilder = setInjectionProfiling(scn)
     .protocols(httpConf)
 
-  setUp(populationBuilder)
+  setUp(
+    populationBuilder
+  )
 }
