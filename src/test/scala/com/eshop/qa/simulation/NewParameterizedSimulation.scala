@@ -8,7 +8,9 @@ import io.gatling.core.Predef._
 import java.time.LocalDateTime
 
 class NewParameterizedSimulation extends BaseSimulation {
+
   var startTime: LocalDateTime = LocalDateTime.now()
+
   private val asserts = Seq(
     global.responseTime.percentile3.lte(5000)
   )
@@ -28,6 +30,7 @@ class NewParameterizedSimulation extends BaseSimulation {
     .maxDuration(testDurationSeconds)
 
   after {
-    DbClient.buildInfoWriter(OrderCreationScenario().startTime)
+    DbClient.buildInfoWriter(startTime)
   }
+
 }

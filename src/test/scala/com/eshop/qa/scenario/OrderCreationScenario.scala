@@ -5,11 +5,7 @@ import com.eshop.qa.models.{CartPage, CategoriesPage, CheckoutPage, HomePage}
 import io.gatling.core.Predef._
 import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
 
-import java.time.LocalDateTime
-
 case class OrderCreationScenario() extends BaseSimulation {
-
-  var startTime: LocalDateTime = LocalDateTime.now()
 
   val scn: ScenarioBuilder = scenario(getClass.getSimpleName)
     .exec(HomePage.getIndexPage("01_getIndexPage"))
