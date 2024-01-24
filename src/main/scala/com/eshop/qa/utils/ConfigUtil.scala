@@ -12,9 +12,9 @@ trait ConfigUtil extends StrictLogging{
   val baseUrl: String = conf.getString("url")
 
   //influxDB credentials
-  val url: String = conf.getString("influx-url")
-  val username: String = conf.getString("influx-username")
-  val password: String = conf.getString("influx-password")
+  val influxUrl: String = conf.getString("influx-url")
+  val influxUsername: String = conf.getString("influx-username")
+  val influxPassword: String = conf.getString("influx-password")
   val database: String = conf.getString("influx-database")
   val measurementName: String = conf.getString("measurement-name")
 

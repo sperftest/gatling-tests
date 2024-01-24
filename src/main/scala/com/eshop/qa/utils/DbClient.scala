@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 object DbClient extends ConfigUtil {
 
-  val influxDB: InfluxDB = InfluxDBFactory.connect(url, username, password)
+  val influxDB: InfluxDB = InfluxDBFactory.connect(influxUrl, influxUsername, influxPassword)
   influxDB.setDatabase(database)
 
   val simulationName: String = simulationClass.split('.')
