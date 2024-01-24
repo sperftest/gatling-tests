@@ -1,8 +1,6 @@
 package demostore
 
-import com.influxdb.client.{InfluxDBClient, InfluxDBClientFactory}
 import demostore.pageObjects._
-import demostore.utils.WriteMetricToInfluxDB
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
@@ -10,16 +8,6 @@ import scala.concurrent.duration.DurationInt
 import scala.util.Random
 
 class Demostore extends Simulation {
-
-  // Change credentials from InfluxDB
-  val url = "http://localhost:8086"
-  val token = "7y03OntLARLN7Atald_mWjb_SLlnBZxDIZRaPbq3lZC6BmOSXWoG6kavGWQrJQX5trQWBH4tT82y714uYoUcvg=="
-  val org = "Solvd"
-  val bucket = "Gatling"
-  val client: InfluxDBClient = InfluxDBClientFactory.create(url, token.toCharArray)
-
-  val metricWriter = new WriteMetricToInfluxDB(org, bucket)
-
 
   val DOMAIN = "demostore.gatling.io"
   private val httpProtocol = http
@@ -61,7 +49,6 @@ class Demostore extends Simulation {
   private val scn = scenario("Recorded Demostore")
     .exec(initSession)
     .exec(CmsPages.homePage)
-    .exec(metricWriter.writeResponseTime(client, "Test1", "HomePage"))
     .pause(1)
     .exec(CmsPages.aboutUsPage)
     .pause(1)
@@ -125,7 +112,6 @@ class Demostore extends Simulation {
 
   object Scenarios {
 
-
     def highPurchase = scenario("High Purchase Scenario")
       .during(testDuration) {
         randomSwitch(
@@ -146,7 +132,6 @@ class Demostore extends Simulation {
   }
 
   // Parallel or consecutive scenarios
-
   setUp(Scenarios.default
     .inject(rampUsers(userCount).during(rampDuration))
     .protocols(httpProtocol)

@@ -3,15 +3,10 @@ package com.eshop.qa.utils
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
 import org.influxdb.{InfluxDB, InfluxDBFactory}
-import com.eshop.qa.utils.ConfigUtil
 
 import java.time.LocalDateTime
 
 object DbClient extends ConfigUtil {
-  val url = "http://localhost:8653"
-  val username = "admin"
-  val password = "admin"
-  val database = "graphite"
 
   val influxDB: InfluxDB = InfluxDBFactory.connect(url, username, password)
   influxDB.setDatabase(database)
@@ -24,7 +19,7 @@ object DbClient extends ConfigUtil {
   val buildNumber: Int =
     PropertyConfigurator.getProperty("BUILD_NUMBER", "0").toInt
 
-  val metricWriter = new WriteMetricToInfluxDB(simulationName)
+  val metricWriter = new WriteMetricToInfluxDB(simulationName, measurementName)
 
   def writeMetricWriter(requestName: String): ChainBuilder = {
     doIf(session => {

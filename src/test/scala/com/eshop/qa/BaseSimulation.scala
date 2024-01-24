@@ -4,13 +4,11 @@ import com.eshop.qa.utils.{ConfigUtil, ScenarioInjector}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-import com.eshop.qa.utils.PropertyConfigurator.getProperty
 import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
 import io.gatling.http.protocol.HttpProtocolBuilder
 
-import scala.concurrent.duration._
-
 class BaseSimulation extends Simulation with ConfigUtil{
+
   protected val httpConf: HttpProtocolBuilder = http
     .baseUrl(baseUrl)
 

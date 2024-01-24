@@ -1,6 +1,6 @@
 package com.eshop.qa.models
 
-import com.eshop.qa.utils.{DbClient, JsonFormatter, Randomizer}
+import com.eshop.qa.utils.{DbClient, JsonFormatter}
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._

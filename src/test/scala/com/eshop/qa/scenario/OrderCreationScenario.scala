@@ -2,13 +2,13 @@ package com.eshop.qa.scenario
 
 import com.eshop.qa.BaseSimulation
 import com.eshop.qa.models.{CartPage, CategoriesPage, CheckoutPage, HomePage}
-import com.eshop.qa.utils.SlackNotificator
 import io.gatling.core.Predef._
 import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
 
 import java.time.LocalDateTime
 
 case class OrderCreationScenario() extends BaseSimulation {
+
   var startTime: LocalDateTime = LocalDateTime.now()
 
   val scn: ScenarioBuilder = scenario(getClass.getSimpleName)
@@ -30,4 +30,5 @@ case class OrderCreationScenario() extends BaseSimulation {
   setUp(
     populationBuilder
   )
+
 }

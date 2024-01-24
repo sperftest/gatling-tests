@@ -8,9 +8,7 @@ import io.gatling.core.structure.ChainBuilder
 import java.time.{LocalDateTime, ZoneOffset}
 import java.util.concurrent.TimeUnit
 
-class WriteMetricToInfluxDB(simulationName: String) {
-
-  val measurementName = "gatling"
+class WriteMetricToInfluxDB(simulationName: String, measurementName: String) {
 
   def writeError(influxdb: InfluxDB, requestName: String): ChainBuilder = {
     exec(session => {

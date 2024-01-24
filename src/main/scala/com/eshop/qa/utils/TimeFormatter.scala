@@ -1,6 +1,7 @@
 package com.eshop.qa.utils
 
 object TimeFormatter {
+
   def formatDuration(milliseconds: Long): String = {
     val totalSeconds = milliseconds / 1000
     val hours = totalSeconds / 3600
@@ -13,4 +14,5 @@ object TimeFormatter {
 
     hoursString + minutesString + secondsString
   }
+
 }

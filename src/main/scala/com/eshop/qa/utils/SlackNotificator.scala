@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter
 import java.time.{Duration, LocalDateTime}
 
 object SlackNotificator {
+
   private val defaultMessage = """{ "message": "Test started" }"""
 
   private val grafanaLink = "127.0.0.1:8857/d/gatling/gatling-report-metrics?from=now-5m&refresh=5s"
