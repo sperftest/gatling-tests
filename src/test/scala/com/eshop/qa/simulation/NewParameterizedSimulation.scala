@@ -5,8 +5,10 @@ import com.eshop.qa.scenario.{OrderCreationScenario, SlackMessageScenario}
 import com.eshop.qa.utils.DbClient
 import io.gatling.core.Predef._
 
-class NewParameterizedSimulation extends BaseSimulation {
+import java.time.LocalDateTime
 
+class NewParameterizedSimulation extends BaseSimulation {
+  var startTime: LocalDateTime = LocalDateTime.now()
   private val asserts = Seq(
     global.responseTime.percentile3.lte(5000)
   )
@@ -19,12 +21,13 @@ class NewParameterizedSimulation extends BaseSimulation {
 
   setUp(
     OrderCreationScenario().populationBuilder
-      .andThen(SlackMessageScenario().populationBuilder)
+      .andThen(
+        SlackMessageScenario(startTime).populationBuilder
+      )
   ).assertions(asserts)
     .maxDuration(testDurationSeconds)
 
   after {
     DbClient.buildInfoWriter(OrderCreationScenario().startTime)
   }
-
 }
