@@ -15,13 +15,14 @@ class BaseSimulation extends Simulation with ConfigUtil{
     .baseUrl(baseUrl)
 
   def setInjectionProfiling(scenario: ScenarioBuilder): PopulationBuilder = {
-    if (loadModel.contains("open")){
-      scenario.inject(ScenarioInjector.injectOpenModel(usersCount, rampUpDurationSeconds))
-    } else if(loadModel.contains("close")){
-      scenario.inject(ScenarioInjector.injectClosedModel(concurrentUsersAmount, rampUpDurationSeconds, steadyStateDurationSeconds))
-    }else {
-      logger.warn("Type of load model had not been chosen when simulation started")
-      scenario.inject(atOnceUsers(1))
-    }
+    scenario.inject(ScenarioInjector.injectOpenModel(usersCount, rampUpDurationSeconds))
+//    if (loadModel.contains("open")){
+//      scenario.inject(ScenarioInjector.injectOpenModel(usersCount, rampUpDurationSeconds))
+//    } else if(loadModel.contains("close")){
+//      scenario.inject(ScenarioInjector.injectClosedModel(concurrentUsersAmount, rampUpDurationSeconds, steadyStateDurationSeconds))
+//    }else {
+//      logger.warn("Type of load model had not been chosen when simulation started")
+//      scenario.inject(atOnceUsers(1))
+//    }
   }
 }

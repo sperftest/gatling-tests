@@ -10,10 +10,15 @@ class NewParameterizedSimulation extends BaseSimulation {
     global.responseTime.percentile3.lte(5000)
   )
 
+  before {
+    println("test duration: " + testDurationSeconds +
+            ", ramp up: " + rampUpDurationSeconds +
+            ", users: " + usersCount)
+  }
+
   setUp(
-    OrderCreationScenario().populationBuilder,
-    SlackMessageScenario().populationBuilder
-//  ).assertions(asserts)
-  )
+    OrderCreationScenario().populationBuilder
+      .andThen(SlackMessageScenario().populationBuilder)
+  ).assertions(asserts)
     .maxDuration(testDurationSeconds)
 }

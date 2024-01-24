@@ -18,5 +18,5 @@ case class SlackMessageScenario() extends BaseSimulation{
   val populationBuilder: PopulationBuilder = scn
     .inject(atOnceUsers(1))
     .protocols(SlackNotificator.getSlackHTTPProtocol)
-  setUp(populationBuilder)
+//  setUp(populationBuilder)
 }
