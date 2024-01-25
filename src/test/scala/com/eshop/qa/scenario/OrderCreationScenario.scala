@@ -7,6 +7,8 @@ import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
 
 case class OrderCreationScenario() extends BaseSimulation {
 
+//  var startTime: LocalDateTime = LocalDateTime.now()
+
   val scn: ScenarioBuilder = scenario(getClass.getSimpleName)
     .exec(HomePage.getIndexPage("01_getIndexPage"))
     .exec(CategoriesPage.getCategories("02_getCategories"))
