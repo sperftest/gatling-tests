@@ -44,11 +44,7 @@ object SlackNotificator {
         .body(
           StringBody(
             requestBody(
-<<<<<<< Updated upstream
               getProperty("JENKINS_LOGIN", "LOGIN_NOT_FROM_JENKINS"),
-=======
-              getProperty("JENKINS_LOGIN", "POKA_NE_ADMIN"),
->>>>>>> Stashed changes
               startTime,
               endTime
             )
