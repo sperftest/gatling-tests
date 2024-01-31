@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set your Slack webhook URL
-SLACK_WEBHOOK_URL="https://hooks.slack.com/triggers/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"
+SLACK_WEBHOOK_URL="https://hooks.slack.com/triggers/..."
 
 # Set your error text
 error_text="Something went wrong!"

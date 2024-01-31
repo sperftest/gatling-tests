@@ -1,7 +1,7 @@
 package com.eshop.qa.simulation
 
 import com.eshop.qa.BaseSimulation
-import com.eshop.qa.scenario.{OrderCreationScenario, SlackMessageScenario}
+import com.eshop.qa.scenario.OrderCreationScenario
 import com.eshop.qa.utils.DbClient
 import io.gatling.core.Predef._
 
@@ -23,9 +23,6 @@ class NewParameterizedSimulation extends BaseSimulation {
 
   setUp(
     OrderCreationScenario().populationBuilder
-      .andThen(
-        SlackMessageScenario(startTime).populationBuilder
-      )
   ).assertions(asserts)
     .maxDuration(testDurationSeconds)
 
