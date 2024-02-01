@@ -11,7 +11,7 @@ import java.time.{Duration, LocalDateTime}
 
 object SlackNotificator {
 
-  private val grafanaLink = "127.0.0.1:8857/d/gatling/gatling-report-metrics?from=now-5m&refresh=5s"
+  private val grafanaLink = "127.0.0.1:3000/d/gatling/gatling-report-metrics?from=now-5m&refresh=5s"
   private val slackDomain = "https://hooks.slack.com/"
   private val channelId = CryptoUtil.decrypt("O4vLdAXtrJF6J5XPOWBqt0ZZIdImZlN2EtIWmrjZhZAfRdYjBv7SeEcL/6Up6AMq9Yi1u6JYXujVZb/TLOzOqeMuIbrnkCH9rp9hkZPBneU=")
 
