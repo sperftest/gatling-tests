@@ -8,7 +8,14 @@ import java.time.LocalDateTime
 
 object DbClient extends ConfigUtil {
 
-  val influxDB: InfluxDB = InfluxDBFactory.connect(influxUrl, influxUsername, influxPassword)
+  private val influxdbUrl: String =
+    if(isJenkins){
+      influxUrl
+    }else{
+      influxUrLocal
+    }
+
+  val influxDB: InfluxDB = InfluxDBFactory.connect(influxdbUrl, influxUsername, influxPassword)
   influxDB.setDatabase(database)
 
   val simulationName: String = simulationClass.split('.')

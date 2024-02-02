@@ -9,8 +9,12 @@ import io.gatling.http.protocol.HttpProtocolBuilder
 
 class BaseSimulation extends Simulation with ConfigUtil{
 
-  protected val httpConf: HttpProtocolBuilder = http
-    .baseUrl(baseUrl)
+  protected val httpConf: HttpProtocolBuilder =
+    if (isJenkins){
+      http.baseUrl(baseUrl)
+    } else {
+      http.baseUrl(baseUrlLocal)
+    }
 
   def setInjectionProfiling(scenario: ScenarioBuilder): PopulationBuilder = {
     if (loadModel.contains("open")){

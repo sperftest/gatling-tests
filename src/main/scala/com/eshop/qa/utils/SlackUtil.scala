@@ -23,7 +23,7 @@ object SlackUtil extends StrictLogging {
   def postSummaryToSlack(attachment: String): ChatPostMessageResponse = {
     slack.methods(TOKEN).chatPostMessage(ChatPostMessageRequest
       .builder()
-      .channel(TEST_CHANNEL)
+      .channel(CHANNEL)
       .attachmentsAsString(attachment)
       .build())
   }
@@ -31,7 +31,7 @@ object SlackUtil extends StrictLogging {
   def uploadFileToTheThread(file: File, threadTs: String): FilesUploadResponse = {
     slack.methods(TOKEN).filesUpload(FilesUploadRequest
       .builder()
-      .channels(util.Arrays.asList(TEST_CHANNEL))
+      .channels(util.Arrays.asList(CHANNEL))
       .threadTs(threadTs)
       .fileData(FileUtils.readFileToByteArray(file))
       .filename("simulation.zip")

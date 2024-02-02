@@ -5,14 +5,20 @@ import com.typesafe.config.{Config, ConfigFactory}
 import com.typesafe.scalalogging.StrictLogging
 
 trait ConfigUtil extends StrictLogging{
+
+  //to determine the type of launch
+  val isJenkins: Boolean = Option(System.getenv("JENKINS_HOME")).isDefined
+
   //access to conf file
   val conf: Config = ConfigFactory.load().withFallback(ConfigFactory.parseResources("performance.conf"))
 
   //service data
   val baseUrl: String = conf.getString("url")
+  val baseUrlLocal: String = conf.getString("local-run-url")
 
   //influxDB credentials
   val influxUrl: String = conf.getString("influx-url")
+  val influxUrLocal: String = conf.getString("local-run-influx-url")
   val influxUsername: String = conf.getString("influx-username")
   val influxPassword: String = conf.getString("influx-password")
   val database: String = conf.getString("influx-database")
