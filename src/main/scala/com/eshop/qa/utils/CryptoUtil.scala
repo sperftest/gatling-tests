@@ -7,7 +7,7 @@ import java.util.regex.Pattern
 
 object CryptoUtil {
 
-  val cryptoKeyPath = System.getProperty("crypto_key_path", "src/test/resources/crypto.key")
+  val cryptoKeyPath = System.getenv("CRYPTO_KEY_PATH").orElse("src/test/resources/crypto.key").toString()
   val cryptoTool: CryptoTool = new CryptoTool(cryptoKeyPath)
 
   val cryptoPattern: Pattern = Pattern.compile(SpecialKeywords.CRYPT)
