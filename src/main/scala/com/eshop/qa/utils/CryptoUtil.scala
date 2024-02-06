@@ -12,7 +12,10 @@ object CryptoUtil {
 
   val cryptoPattern: Pattern = Pattern.compile(SpecialKeywords.CRYPT)
 
-  def decrypt(str: String): String = cryptoTool.decryptByPattern(str, cryptoPattern)
+  def decrypt(str: String): String = {
+    println(s"Crypto Key Path: $cryptoKeyPath")
+    cryptoTool.decryptByPattern(str, cryptoPattern)
+  }
 
   def encrypt(str: String): String = cryptoTool.encrypt(str)
 
