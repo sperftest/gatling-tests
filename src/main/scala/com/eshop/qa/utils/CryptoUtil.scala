@@ -1,13 +1,13 @@
 package com.eshop.qa.utils
 
+import com.eshop.qa.utils.PropertyConfigurator.getProperty
 import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords
 import com.qaprosoft.carina.core.foundation.crypto.{CryptoConsole, CryptoTool}
 
 import java.util.regex.Pattern
-import scala.io.Source
 
 object CryptoUtil {
-  val cryptoKeyPath = System.getProperty("CRYPTO_KEY_PATH", "src/test/resources/crypto.key")
+  val cryptoKeyPath = getProperty("CRYPTO_KEY_PATH", "src/test/resources/crypto.key")
   val cryptoTool: CryptoTool = new CryptoTool(cryptoKeyPath)
 
   val cryptoPattern: Pattern = Pattern.compile(SpecialKeywords.CRYPT)
