@@ -13,7 +13,7 @@ import scala.io.Source
 
 object SlackNotificationMessenger extends StrictLogging with ConfigUtil {
 
-  private val grafanaLink: String = s"http://127.0.0.1:3000/d/gatling/gatling-report-metrics?from=now-${(testDurationSeconds+10).toString}s&refresh=5s"
+  private val grafanaLink: String = s"http://127.0.0.1:3000/d/gatling/gatling-report-metrics?from=now-${(testDurationSeconds+10).toString}s&refresh=30s"
   val attachmentTemplate = "[{\"color\": \"#008000\",\n" +
     "\"text\": \"```textHolder```\",\n" +
     "\"pretext\": \"*SimulationHolder* was ended. Duration: *DurationHolder* *TimeUnitsHolder*. The report zip will be attached to the thread. Unzip it and open *index.html* file\",\n" +
