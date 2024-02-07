@@ -4,10 +4,10 @@ import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords
 import com.qaprosoft.carina.core.foundation.crypto.{CryptoConsole, CryptoTool}
 
 import java.util.regex.Pattern
+import scala.io.Source
 
 object CryptoUtil {
-
-  val cryptoKeyPath = System.getenv("CRYPTO_KEY_PATH").orElse("src/test/resources/crypto.key").toString()
+  val cryptoKeyPath = System.getProperty("CRYPTO_KEY_PATH", "src/test/resources/crypto.key")
   val cryptoTool: CryptoTool = new CryptoTool(cryptoKeyPath)
 
   val cryptoPattern: Pattern = Pattern.compile(SpecialKeywords.CRYPT)

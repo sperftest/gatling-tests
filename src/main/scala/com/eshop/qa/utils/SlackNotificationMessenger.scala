@@ -83,6 +83,7 @@ object SlackNotificationMessenger extends StrictLogging with ConfigUtil {
       .replaceAll("SimulationHolder", simulationName)
       .replaceAll("DurationHolder", getProperty("TEST_DURATION", testDurationSeconds.toString))
       .replaceAll("TimeUnitsHolder", getProperty("DURATION_MEASUREMENTS", "seconds"))
+
     val threadTs = SlackUtil.postSummaryToSlack(attachment).getTs
     SlackUtil.uploadFileToTheThread(new File(zippingPath), threadTs)
   }
