@@ -2,6 +2,7 @@ package com.eshop.qa.simulation
 
 import com.eshop.qa.BaseSimulation
 import com.eshop.qa.scenario.OrderCreationScenario
+import com.eshop.qa.scenario.FullPathBuyScenario
 import com.eshop.qa.utils.DbClient
 import io.gatling.core.Predef._
 
@@ -22,7 +23,8 @@ class NewParameterizedSimulation extends BaseSimulation {
   }
 
   setUp(
-    OrderCreationScenario().populationBuilder
+    OrderCreationScenario().populationBuilder,
+    FullPathBuyScenario().populationBuilder
   ).assertions(asserts)
     .maxDuration(testDurationSeconds)
 
